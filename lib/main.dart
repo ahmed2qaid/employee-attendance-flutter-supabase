@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
@@ -16,48 +17,61 @@ class AttendanceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = ColorScheme.fromSeed(
-      seedColor: const Color(0xFF2563EB),
+      seedColor: const Color(0xFF0F766E),
       brightness: Brightness.light,
+      surface: const Color(0xFFFFFFFF),
     );
+    final textTheme = GoogleFonts.ibmPlexSansArabicTextTheme();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: scheme,
-        scaffoldBackgroundColor: const Color(0xFFF4F7FB),
+        textTheme: textTheme,
+        primaryTextTheme: textTheme,
+        scaffoldBackgroundColor: const Color(0xFFF5F5F2),
         cardTheme: const CardThemeData(
           elevation: 0,
           margin: EdgeInsets.zero,
+          color: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            side: BorderSide(color: Color(0xFFE2E8F0)),
+            borderRadius: BorderRadius.all(Radius.circular(14)),
+            side: BorderSide(color: Color(0xFFDFDFD8)),
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
-          contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+          contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 11),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(13)),
-            borderSide: BorderSide(color: Color(0xFFCBD5E1)),
+            borderRadius: BorderRadius.all(Radius.circular(9)),
+            borderSide: BorderSide(color: Color(0xFFCACAC2)),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(13)),
-            borderSide: BorderSide(color: Color(0xFFCBD5E1)),
+            borderRadius: BorderRadius.all(Radius.circular(9)),
+            borderSide: BorderSide(color: Color(0xFFCACAC2)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(9)),
+            borderSide: BorderSide(color: Color(0xFF0F766E), width: 1.3),
           ),
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
-            minimumSize: const Size(110, 48),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
-            textStyle: const TextStyle(fontWeight: FontWeight.w800),
+            minimumSize: const Size(105, 42),
+            backgroundColor: const Color(0xFF0F766E),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+            textStyle: GoogleFonts.ibmPlexSansArabic(fontWeight: FontWeight.w700),
           ),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            minimumSize: const Size(105, 44),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            textStyle: const TextStyle(fontWeight: FontWeight.w700),
+            minimumSize: const Size(100, 40),
+            foregroundColor: const Color(0xFF171717),
+            side: const BorderSide(color: Color(0xFFCACAC2)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+            textStyle: GoogleFonts.ibmPlexSansArabic(fontWeight: FontWeight.w700),
           ),
         ),
       ),
@@ -270,7 +284,7 @@ class _AttendancePageState extends State<AttendancePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: Color(0xFF334155))),
+          Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF42423F))),
           const SizedBox(height: 7),
           child,
         ],
@@ -281,31 +295,31 @@ class _AttendancePageState extends State<AttendancePage> {
   Widget statCard(String label, String value, IconData icon, Color accent) {
     return Container(
       width: 190,
-      constraints: const BoxConstraints(minHeight: 112),
-      padding: const EdgeInsets.all(17),
+      constraints: const BoxConstraints(minHeight: 104),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
-        boxShadow: const [BoxShadow(color: Color(0x0D0F172A), blurRadius: 22, offset: Offset(0, 8))],
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFDFDFD8)),
+        boxShadow: const [BoxShadow(color: Color(0x0A171717), blurRadius: 20, offset: Offset(0, 8))],
       ),
       child: Row(
         children: [
           Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(color: accent.withValues(alpha: .09), borderRadius: BorderRadius.circular(12)),
-            child: Icon(icon, color: accent, size: 21),
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(color: accent.withValues(alpha: .09), borderRadius: BorderRadius.circular(9)),
+            child: Icon(icon, color: accent, size: 19),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Color(0xFF64748B))),
+                Text(label, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xFF70706A))),
                 const SizedBox(height: 4),
-                Text(value, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Color(0xFF0F172A))),
+                Text(value, style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w700, color: Color(0xFF171717))),
               ],
             ),
           ),
@@ -320,14 +334,14 @@ class _AttendancePageState extends State<AttendancePage> {
     final s = shiftFor(d);
     final status = a['status'] == 1 ? 'غياب' : a['status'] == 2 ? 'معلق' : 'حضور';
     final statusColor = a['status'] == 1
-        ? const Color(0xFFDC2626)
+        ? const Color(0xFF991B1B)
         : a['status'] == 2
-            ? const Color(0xFFD97706)
-            : const Color(0xFF15803D);
+            ? const Color(0xFF92400E)
+            : const Color(0xFF166534);
     return Card(
-      margin: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 9),
       child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(14),
         child: LayoutBuilder(
           builder: (context, c) {
             final compact = c.maxWidth < 760;
@@ -336,10 +350,10 @@ class _AttendancePageState extends State<AttendancePage> {
               children: [
                 Row(
                   children: [
-                    Text(key(d), style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15)),
+                    Text(key(d), style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
                     const SizedBox(width: 8),
                     if (friday)
-                      const _Badge(text: 'إجازة الجمعة', color: Color(0xFF64748B))
+                      const _Badge(text: 'إجازة الجمعة', color: Color(0xFF70706A))
                     else
                       _Badge(text: status, color: statusColor),
                   ],
@@ -348,7 +362,7 @@ class _AttendancePageState extends State<AttendancePage> {
                 if (!friday)
                   Text(
                     '${s == 'morning' ? '06:00 – 14:00' : '14:00 – 22:00'}  •  حضور ${durationText(a['worked']!)}  •  إضافي ${durationText(a['overtime']!)}  •  تأخير ${a['late']}د  •  مبكر ${a['early']}د',
-                    style: const TextStyle(color: Color(0xFF64748B), height: 1.65, fontSize: 12.5),
+                    style: const TextStyle(color: Color(0xFF70706A), height: 1.65, fontSize: 12),
                   ),
               ],
             );
@@ -386,51 +400,52 @@ class _AttendancePageState extends State<AttendancePage> {
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1460),
+            constraints: const BoxConstraints(maxWidth: 1380),
             child: ListView(
               padding: const EdgeInsets.fromLTRB(18, 20, 18, 42),
               children: [
                 Container(
-                  padding: const EdgeInsets.all(26),
+                  padding: const EdgeInsets.all(22),
                   decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [Color(0xFF0F172A), Color(0xFF172554), Color(0xFF2563EB)],
-                    ),
-                    borderRadius: BorderRadius.circular(26),
-                    boxShadow: const [BoxShadow(color: Color(0x260F172A), blurRadius: 34, offset: Offset(0, 14))],
+                    color: Colors.white,
+                    border: Border.all(color: const Color(0xFFDFDFD8)),
+                    borderRadius: BorderRadius.circular(14),
+                    boxShadow: const [BoxShadow(color: Color(0x0A171717), blurRadius: 24, offset: Offset(0, 8))],
                   ),
-                  child: const Row(
+                  child: Row(
                     children: [
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('FLUTTER WEB + SUPABASE', style: TextStyle(color: Color(0xFFBFDBFE), fontSize: 12, fontWeight: FontWeight.w900, letterSpacing: 1)),
-                            SizedBox(height: 7),
-                            Text('نظام حساب دوام الموظفين', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900)),
-                            SizedBox(height: 5),
-                            Text('إدارة الحضور والورديات المتناوبة والتأخير والانصراف المبكر والوقت الإضافي.', style: TextStyle(color: Color(0xFFDBEAFE), fontSize: 14)),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+                              decoration: BoxDecoration(color: const Color(0xFFE9F5F2), borderRadius: BorderRadius.circular(30), border: Border.all(color: const Color(0xFFC5E3DE))),
+                              child: const Text('FLUTTER WEB + SUPABASE', style: TextStyle(color: Color(0xFF0B5F59), fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: .5)),
+                            ),
+                            const SizedBox(height: 9),
+                            const Text('نظام حساب دوام الموظفين', style: TextStyle(color: Color(0xFF171717), fontSize: 28, fontWeight: FontWeight.w700)),
+                            const SizedBox(height: 5),
+                            const Text('إدارة الحضور والورديات المتناوبة والتأخير والانصراف المبكر والوقت الإضافي.', style: TextStyle(color: Color(0xFF70706A), fontSize: 13)),
                           ],
                         ),
                       ),
-                      Icon(Icons.schedule_rounded, color: Colors.white, size: 52),
+                      const Icon(Icons.schedule_rounded, color: Color(0xFF0F766E), size: 46),
                     ],
                   ),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 16),
                 Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(18),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Text('إعدادات الدوام', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w900)),
-                        const SizedBox(height: 16),
+                        const Text('إعدادات الدوام', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                        const SizedBox(height: 15),
                         Wrap(
-                          spacing: 14,
-                          runSpacing: 14,
+                          spacing: 13,
+                          runSpacing: 13,
                           children: [
                             fieldBox(
                               label: 'اسم الموظف',
@@ -521,17 +536,17 @@ class _AttendancePageState extends State<AttendancePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 18),
+                        const SizedBox(height: 16),
                         Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
+                          spacing: 9,
+                          runSpacing: 9,
                           children: [
                             FilledButton.icon(onPressed: load, icon: const Icon(Icons.cloud_download_rounded), label: const Text('تحميل البيانات')),
                             FilledButton.icon(onPressed: save, icon: const Icon(Icons.save_rounded), label: const Text('حفظ التعديلات')),
                             if (message.isNotEmpty)
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                                child: Text(message, style: const TextStyle(color: Color(0xFF475569), fontWeight: FontWeight.w700)),
+                                child: Text(message, style: const TextStyle(color: Color(0xFF70706A), fontWeight: FontWeight.w600)),
                               ),
                           ],
                         ),
@@ -539,18 +554,18 @@ class _AttendancePageState extends State<AttendancePage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 16),
                 LayoutBuilder(
                   builder: (context, c) {
                     final cardWidth = c.maxWidth < 600 ? c.maxWidth : c.maxWidth < 1000 ? (c.maxWidth - 12) / 2 : (c.maxWidth - 36) / 4;
                     final data = [
-                      ('إجمالي الحضور', durationText(total), Icons.access_time_filled_rounded, const Color(0xFF2563EB)),
-                      ('أيام العمل', (total / 480).toStringAsFixed(6), Icons.calendar_view_week_rounded, const Color(0xFF7C3AED)),
-                      ('الوقت الإضافي', durationText(totalOvertime), Icons.more_time_rounded, const Color(0xFF15803D)),
-                      ('التأخير', '$totalLate د', Icons.timer_off_rounded, const Color(0xFFD97706)),
-                      ('الانصراف المبكر', '$totalEarly د', Icons.exit_to_app_rounded, const Color(0xFFF59E0B)),
-                      ('الغياب', '$absent', Icons.person_off_rounded, const Color(0xFFDC2626)),
-                      ('المعلق', '$pending', Icons.pending_actions_rounded, const Color(0xFF64748B)),
+                      ('إجمالي الحضور', durationText(total), Icons.access_time_filled_rounded, const Color(0xFF0F766E)),
+                      ('أيام العمل', (total / 480).toStringAsFixed(6), Icons.calendar_view_week_rounded, const Color(0xFF5F625F)),
+                      ('الوقت الإضافي', durationText(totalOvertime), Icons.more_time_rounded, const Color(0xFF166534)),
+                      ('التأخير', '$totalLate د', Icons.timer_off_rounded, const Color(0xFF92400E)),
+                      ('الانصراف المبكر', '$totalEarly د', Icons.exit_to_app_rounded, const Color(0xFF92400E)),
+                      ('الغياب', '$absent', Icons.person_off_rounded, const Color(0xFF991B1B)),
+                      ('المعلق', '$pending', Icons.pending_actions_rounded, const Color(0xFF70706A)),
                     ];
                     return Wrap(
                       spacing: 12,
@@ -559,14 +574,14 @@ class _AttendancePageState extends State<AttendancePage> {
                     );
                   },
                 ),
-                const SizedBox(height: 18),
+                const SizedBox(height: 16),
                 Row(
                   children: [
-                    const Expanded(child: Text('سجل أيام الدوام', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900))),
-                    Text('${dates.length} يوم', style: const TextStyle(color: Color(0xFF64748B), fontWeight: FontWeight.w700)),
+                    const Expanded(child: Text('سجل أيام الدوام', style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700))),
+                    Text('${dates.length} يوم', style: const TextStyle(color: Color(0xFF70706A), fontWeight: FontWeight.w600)),
                   ],
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 11),
                 ...dates.map(attendanceCard),
               ],
             ),
@@ -587,7 +602,7 @@ class _Badge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
       decoration: BoxDecoration(color: color.withValues(alpha: .09), borderRadius: BorderRadius.circular(30)),
-      child: Text(text, style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w900)),
+      child: Text(text, style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w700)),
     );
   }
 }
